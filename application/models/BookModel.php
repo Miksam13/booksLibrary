@@ -8,19 +8,22 @@ class BookModel extends Model{
     public function get_data($id = ''){
         $db = new \application\lib\Db();
 
-        $all_authors = $db->row("SELECT * FROM authors");
+        $authors = $db->row("SELECT * FROM authors");
         $book = $db->row("SELECT * FROM books WHERE id=$id");
-        $authors = [];
-        foreach ($all_authors as $author) {
-            foreach (json_decode($author["books_id"]) as $book_id) {
-                if ((int)$book_id === (int)$id) {
-                    array_push($authors, $author['name']);
+        $connects = $db->row("SELECT * FROM books_connect_author");
+        $book_authors = [];
+        foreach ($connects as $connect) {
+            if($connect["book_id"] === (int)$id) {
+                foreach ($authors as $author) {
+                    if($author["id"] === $connect["author_id"]) {
+                        array_push($book_authors, $author["name"]);
+                    }
                 }
             }
         }
         return [
             'book'=>$book,
-            'authors'=>$authors
+            'authors'=>$book_authors
         ];
     }
 }

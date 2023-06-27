@@ -4,7 +4,7 @@
             <script id="pattern" type="text/template">
                 <div data-book-id="<?php echo $data['book'][0]['id']?>" class="book_item col-xs-6 col-sm-3 col-md-2 col-lg-2">
                     <div class="book">
-                        <a href="/book/<?php echo $data['book'][0]['id']?>"><img src="./public/img/<?php echo $data['book'][0]['id']?>.jpg" alt="{title}">
+                        <a href="/book/<?php echo $data['book'][0]['id']?>"><img src="./static/img/<?php echo $data['book'][0]['id']?>.jpg" alt="{title}">
                             <div data-title="<?php echo $data['book'][0]["title"]?>" class="blockI">
                                 <div data-book-title="<?php echo $data['book'][0]["title"]?>" class="title size_text"><?php echo $data['book'][0]["title"]?></div>
                                 <div data-book-author="<?php foreach ($data['authors'] as $author){echo $author.' ';}?>" class="author"><?php foreach ($data['authors'] as $author){echo $author.' ';}?></div>
@@ -19,7 +19,7 @@
             <div id="id" book-id="<?php echo $data['book'][0]["id"]?>">
                 <div id="bookImg" class="col-xs-12 col-sm-3 col-md-3 item" style="
     margin:;
-"><img src="../public/img/<?php echo $data['book'][0]["id"]?>.jpg" alt="Responsive image" class="img-responsive">
+"><img src="../static/img/<?php echo $data['book'][0]["id"]?>.jpg" alt="Responsive image" class="img-responsive">
 
                     <hr>
                 </div>
@@ -50,7 +50,7 @@
                     <p class="description"><?php echo $data['book'][0]["description"]?></p>
                 </div>
             </div>
-            <script src="<?php echo strpos($_SERVER['REQUEST_URI'], "book/") ? "../public" : "public"?>/js/book.js" defer=""></script>
+            <script src="<?php echo strpos($_SERVER['REQUEST_URI'], "book/") ? "../static" : "static"?>/js/book.js" defer=""></script>
         </div>
     </div>
 </section>

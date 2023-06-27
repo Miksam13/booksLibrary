@@ -1,0 +1,1 @@
+CREATE TABLE authors (id INT AUTO_INCREMENT, name TEXT, books_id TEXT)

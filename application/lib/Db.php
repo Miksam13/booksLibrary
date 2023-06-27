@@ -14,6 +14,7 @@ class Db {
         $this->db = new PDO('mysql:host='.$config['host'].';dbname='.$config['db_name'], $config['username'], $config['password']);
     }
 
+
     public function query($sql, $params = []){
         $stmt = $this->db->prepare($sql);
         if (!empty($params)) {

@@ -1,25 +1,21 @@
 <?php
-/*
-namespace application\models;
-
-use application\core\Model;
-
-class Main extends Model {
-    public function getNews() {
-        $result =  $this->db->row('SELECT title, description FROM news');
-        return $result;
-    }
-}*/
 
 spl_autoload_register(function ($class_name) {
     include $class_name . '.php';
 });
-class MainModel extends Model{
+
+class SearchModel extends Model{
     public function get_data($id = ''){
         $db = new \application\lib\Db();
 
+        $str = $_SERVER['REQUEST_URI'];
+        $search = "books?search=";
+        $pos = strpos($str, $search);
+
+        $search_text = urldecode(substr($str, $pos + strlen($search)));
+
         $authors = $db->row("SELECT * FROM authors");
-        $books = $db->row("SELECT * FROM books");
+        $books = $db->row("SELECT * FROM books WHERE title LIKE '%${search_text}%'");
         $connects = $db->row("SELECT * FROM books_connect_author");
         $data = [];
         foreach ($books as $book) {

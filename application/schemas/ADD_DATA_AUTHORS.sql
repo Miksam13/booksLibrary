@@ -1,0 +1,1 @@
+INSERT INTO authors (name, books_id) VALUES ('Vasya Pupkin', '[2222]')

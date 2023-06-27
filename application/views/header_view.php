@@ -2,7 +2,7 @@
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="col-xs-5 col-sm-2 col-md-2 col-lg-2">
-                <div class="logo"><a href="http://localhost/php_projects/books-library/" class="navbar-brand"><span class="sh">Ш</span><span class="plus">++</span></a></div>
+                <div class="logo"><a href="http://localhost/books-library/" class="navbar-brand"><span class="sh">Ш</span><span class="plus">++</span></a></div>
             </div>
             <div class="col-xs-12 col-sm-7 col-md-8 col-lg-8">
                 <div class="main-menu">
@@ -12,9 +12,45 @@
                                 <input id="search" type="text" placeholder="Найти книгу" class="form-control">
                                 <script>
                                     $("#search").bind("keypress", function (e) {
-                                        if (e.keyCode == 13) {
+                                        if (e.keyCode === 13) {
                                             e.preventDefault();
-                                            alert("а вот это придется сделать самому. Ваш @rshmelev");
+                                            //const booksArr =
+                                            //function Search (books, search) {
+                                            //    const searchResult = [];
+                                            //    const matchingElements = [];
+                                            //    books.map((book) => {
+                                            //        if(book.title === search || book.description === search) {
+                                            //            matchingElements.push(book);
+                                            //        }
+                                            //        if(book.title.indexOf(search) >= 0) {
+                                            //            matchingElements.push(book);
+                                            //        }
+                                            //        if(book.description.indexOf(search) >= 0) {
+                                            //            matchingElements.push(book);
+                                            //        }
+                                            //    });
+                                            //
+                                            //    matchingElements.map((x) => {
+                                            //        const el = searchResult.find((k) => k.ID === x.ID)
+                                            //        if(!el) {
+                                            //            searchResult.push(x)
+                                            //        }
+                                            //    })
+                                            //
+                                            //    if(!searchResult.length) {
+                                            //        console.log('Not found')
+                                            //    } else if (searchResult.length) {
+                                            //        console.log('Search result:')
+                                            //        console.log(searchResult);
+                                            //        return searchResult;
+                                            //    }
+                                            //}
+                                            //const result = Search(booksArr, e.target.value);
+                                            if($("#search").val() !== '') {
+                                                window.location = `books?search=${$("#search").val()}`
+                                            } else {
+                                                $("#search").blur();
+                                            }
                                         }
                                     })
                                 </script>
@@ -32,3 +68,11 @@
         </div>
     </nav>
 </section>
+<script>
+    $(document).ready(function(){
+        let params = new URLSearchParams(window.location.search);
+        if(params.has('search')){
+            $("#search").attr("value", params.get('search'));
+        }
+    });
+</script>

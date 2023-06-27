@@ -6,13 +6,27 @@ class Route {
         $controller_name = 'Main';
         $action_name = 'index';
 
-        $routes = explode('/php_projects/books-library/', $_SERVER['REQUEST_URI']);
+        $routes = explode('/books-library/', $_SERVER['REQUEST_URI']);
 
         // получаем имя контроллера
         if (!empty($routes[1])) {
-            preg_match('/book\/(\d+)/', $routes[1], $matches);
-            $id = isset($matches[1]) ? $matches[1] : null;
-            $controller_name = 'Book';
+            if($routes[1] === 'admin') {
+                $controller_name = 'Admin';
+            } else if (strpos($routes[1], "admin?table_page=") !== false) {
+                $controller_name = 'Admin';
+            } else {
+                $str = $routes[1];
+                $search = "books?search=";
+                $pos = strpos($str, $search);
+
+                if ($pos !== false) {
+                    $controller_name = 'Search';
+                } else {
+                    preg_match('/book\/(\d+)/', $routes[1], $matches);
+                    $id = isset($matches[1]) ? $matches[1] : null;
+                    $controller_name = 'Book';
+                }
+            }
         }
 
         // добавляем префиксы

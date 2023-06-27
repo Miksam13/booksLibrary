@@ -1,0 +1,1 @@
+INSERT INTO books (title, description, pages, year, imgURL, clicks) VALUES ('SomeTitle', 'SomeDescription', 250, 2222, '/img/2222.jpg', 0)
